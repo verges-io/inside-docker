@@ -13,6 +13,7 @@ currentUser=$(id -u -n)
 case "${argument}" in
     skype)
         echo "Starting Skype docker container"
+        docker rm $(docker ps -a | grep Exited | grep "sameersbn/skype" | awk '{print $1}') 2>&1 >/dev/null || true
         docker run -d -it \
             -v /etc/localtime:/etc/localtime \
             -v /home/${currentUser}/.Skype:/home/skype/.Skype \
