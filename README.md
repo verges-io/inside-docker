@@ -2,7 +2,7 @@
 A small project that helps to easily run linux desktop applications as Docker containers.
 
 ##Installation
-1. Checkout and `cd ./inside-docker`
+1. Clone and `cd ./inside-docker`
 2. Run `sudo ./install.sh`<br>
     this will create a symbolic link called `inside-docker` within your `/usr/local/bin`-folder
 
