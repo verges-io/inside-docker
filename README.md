@@ -12,4 +12,12 @@ Hit ALT+F2 or run a terminal and enter `inside-docker <SERVICE-NAME>` to start o
 * `inside-docker skype` starts Skype<br>
     sound is working fine after a few tweaks. The cam was recognized instantly.
 * `inside-docker tachrome` starts a throw-away instance of Chrome<br>
-    Ghostery, AdBlock & a Proxy switcher are already installed. If you're running Tor on your host, you can pipe your traffic through it by selecting TOR as proxy. 
+    Ghostery, AdBlock & a Proxy switcher are already installed. If you're running Tor on your host, you can pipe your traffic through it by selecting TOR as proxy.
+
+##Troubleshooting
+If sound is not working from within the containers, try
+
+1. install `paprefson` your host system (something like `sudo apt-get install paprefs`)
+2. launch "PulseAudio Preferences" and ensure that _"Enable network access to local sound devices"_ is checked on the "Network Server" tab
+3. Restart PulseAudio (something like `pulseaudio -k && pulseaudio -D`)
+4. launch a container and retry
