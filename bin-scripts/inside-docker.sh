@@ -36,16 +36,12 @@ case "${argument}" in
         docker rm $(docker ps -a | grep Exited | grep "sotapanna108/chrome-privacy" | awk '{print $1}') 2>&1 >/dev/null || true
         docker run -d -it \
             --net host \
-            --cpuset-cpus 0 \
-            --memory 512mb \
             -v /etc/localtime:/etc/localtime:ro \
             -v /tmp/.X11-unix:/tmp/.X11-unix \
             -e DISPLAY=unix$DISPLAY \
             -v /var/lib/dbus:/var/lib/dbus \
             -v $HOME:/root/parent_home \
             -v $HOME/Downloads:/root/Downloads \
-            -e PULSE_SERVER=tcp:127.0.0.1:4713 \
-            -e PULSE_COOKIE_DATA=`pax11publish -d | grep --color=never -Po '(?<=^Cookie: ).*'` \
             -e USER_UID=${user_uid} \
             -e USER_GID=${user_gid} \
             --group-add audio \
