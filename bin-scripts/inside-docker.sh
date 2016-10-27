@@ -31,6 +31,25 @@ case "${argument}" in
         skype
     ;;
 
+    pidgin)
+        echo "Starting Pidgin"
+        docker rm $(docker ps -a | grep Exited | grep "sotapanna108/pidgin" | awk '{print $1}') 2>&1 >/dev/null || true
+        docker run -d \
+            -v /etc/localtime:/etc/localtime \
+            -v /home/${currentUser}/.Skype:/home/skype/.Skype \
+            -v /home/${currentUser}/Downloads:/home/skype/Downloads \
+            -v /tmp/.X11-unix:/tmp/.X11-unix \
+            -v /tmp/.docker.xauth:/tmp/.docker.xauth \
+            -v /run/user/1000/pulse:/run/pulse \
+            -e USER_UID=1000 \
+            -e USER_GID=1000 \
+            -e DISPLAY \
+            -e XAUTHORITY=/tmp/.docker.xauth \
+            -e TZ=CEST \
+            --device "/dev/video0" --privileged \
+        sotapanna108/pidgin
+    ;;
+
     tachrome)
         echo "Starting throw-away-chrome docker container"
         docker rm $(docker ps -a | grep Exited | grep "sotapanna108/chrome-privacy" | awk '{print $1}') 2>&1 >/dev/null || true
@@ -57,5 +76,5 @@ case "${argument}" in
         msg="The service was not recognized as Docker service."
         zenity --info --text="${msg}"
         echo "${msg}"
-        echo $"Usage: $0 {skype|tachrome}"
+        echo $"Usage: $0 {skype|tachrome|pidgin}"
 esac
