@@ -46,7 +46,7 @@ case "${argument}" in
             -e DISPLAY \
             -e XAUTHORITY=/tmp/.docker.xauth \
             -e TZ=CEST \
-            --device "/dev/video0" --privileged \
+            --device "/dev/video0" \
         sotapanna108/pidgin
     ;;
 
@@ -59,8 +59,8 @@ case "${argument}" in
             -v /tmp/.X11-unix:/tmp/.X11-unix \
             -e DISPLAY=unix$DISPLAY \
             -v /var/lib/dbus:/var/lib/dbus \
-            -v $HOME:/root/parent_home \
-            -v $HOME/Downloads:/root/Downloads \
+            -v $HOME:/home/chrome/parent_home \
+            -v $HOME/Downloads:/home/chrome/Downloads \
             -e USER_UID=${user_uid} \
             -e USER_GID=${user_gid} \
             --group-add audio \
@@ -69,7 +69,8 @@ case "${argument}" in
             -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro \
             -v /dev/shm:/dev/shm \
             -v /run/dbus/:/run/dbus/:rw \
-            -v /dev/snd:/dev/snd --privileged \
+            -v /dev/snd:/dev/snd \
+            --privileged \
         sotapanna108/chrome-privacy
     ;;
     *)
